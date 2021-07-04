@@ -1,26 +1,25 @@
 public abstract class ChessPiece {
-    public final static boolean White = true;
-    public final static boolean Black = false;
+    String color;
+    boolean check = true;
 
-    private boolean color;
-    private int value;
-    public ChessPiece(boolean c)
-    {
-        color = c;
-        value = 0;
+    public ChessPiece(String color) {
+        this.color = color;
     }
 
-    abstract public Vector getLegalMoves(Point from, ChessBoard b);
+    public abstract String getColor();
+    public abstract boolean canMoveToPosition(ChessBoard chessBoard, int line, int column, int toLine, int toColumn);
+    public abstract String getSymbol();
 
-   abstract public void drawPiece(int x, int y, Graphics g);
+    protected boolean checkPos(int pos) {
+        return pos >= 0 && pos <= 7;
+    }
 
-    public boolean getColor() {
-        return color;
+    protected int getMax(int a, int b) {
+        return Math.max(a, b);
     }
-    public int getValue() {
-        return value;
+
+    protected int getMin(int a, int b) {
+        return Math.min(a, b);
     }
-    protected void setValue(int v) {
-        value = v;
-    }
+
 }
